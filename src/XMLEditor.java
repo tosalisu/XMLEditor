@@ -94,7 +94,6 @@ public class XMLEditor extends JFrame implements ActionListener {
 	private SAXBuilder builder = new SAXBuilder();
 	private Document document;
 	private JTree tree;
-	private BorderLayout borderLayout;
 	private boolean isNewButtonClicked = false;
 	private boolean isOpenButtonClicked = false;
 	private TreePath path;
@@ -119,7 +118,6 @@ public class XMLEditor extends JFrame implements ActionListener {
 		setResizable(false);
 		setVisible(true);
 
-		borderLayout = new BorderLayout();
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		fileMenu.setMnemonic(KeyEvent.VK_F);
@@ -293,7 +291,8 @@ public class XMLEditor extends JFrame implements ActionListener {
 		toolBar.add(quitButton);
 
 		setJMenuBar(menuBar);
-		add(toolBar, borderLayout.NORTH);
+		add(toolBar, BorderLayout.NORTH);
+		add(toolBar, new BorderLayout().NORTH);
 
 
 		addWindowListener(new WindowAdapter() {
@@ -394,7 +393,7 @@ public class XMLEditor extends JFrame implements ActionListener {
 					int returnVal = fileChooser.showOpenDialog(null);
 
 
-					if(returnVal == fileChooser.APPROVE_OPTION) {
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
 
 						isOpenButtonClicked = true;
 						isNewButtonClicked = true;
@@ -471,7 +470,7 @@ public class XMLEditor extends JFrame implements ActionListener {
 						remove(scrollPane);
 					}
 					scrollPane = new JScrollPane(tree);
-					add(scrollPane, borderLayout.CENTER);
+					add(scrollPane, BorderLayout.CENTER);
 
 					activateButtons(true);
 					revalidate();
@@ -569,7 +568,7 @@ public class XMLEditor extends JFrame implements ActionListener {
 								remove(scrollPane);
 							}
 							scrollPane = new JScrollPane(tree);
-							add(scrollPane, borderLayout.CENTER);
+							add(scrollPane, BorderLayout.CENTER);
 							revalidate();
 							isNewButtonClicked = true;
 							isOpenButtonClicked = true;
@@ -973,7 +972,7 @@ public class XMLEditor extends JFrame implements ActionListener {
 
 			int returnVal = fileChooser.showSaveDialog(null);
 			//model = tree.getModel();
-			if(returnVal == fileChooser.APPROVE_OPTION)
+			if(returnVal == JFileChooser.APPROVE_OPTION)
 			{
 				fileName = fileChooser.getSelectedFile().getAbsolutePath();
 				file = new File(fileName);
